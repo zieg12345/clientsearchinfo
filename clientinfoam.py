@@ -25,9 +25,10 @@ def safe_get(row, key, default=None, convert=None):
 # Initialize session state for data and debug info
 if 'masterlist' not in st.session_state:
     st.session_state.masterlist = pd.DataFrame(columns=[
-        'Name', 'Account Key', 'Contract Number', 'Birthdate', 'Repaymen Cycle',
+        'Name', 'Account Key', 'Contract Number', 'Birthdate', 'Repayment Cycle',  # Fixed typo
         'Delay Days', 'Currency Code', 'Total Outstanding', 'Statement Balance',
-        'Statement Mimum Payment', 'Statement Overdue Amount', 'Installment Amount (01)',
+        'Statement Minimum Payment',  # Fixed typo
+        'Statement Overdue Amount', 'Installment Amount (01)',
         'Installment Amount (02)', 'Email (01)', 'Residence Add'
     ])
 if 'debug_issues' not in st.session_state:
@@ -106,13 +107,13 @@ with tab2:
                 st.markdown(f"**Account Key:** {safe_get(row, 'Account Key', '')}", unsafe_allow_html=True)
                 st.markdown(f"**Contract Number:** {safe_get(row, 'Contract Number', '')}", unsafe_allow_html=True)
                 st.markdown(f"**Birthdate:** {safe_get(row, 'Birthdate', None, lambda x: pd.to_datetime(x, errors='coerce')).strftime('%Y-%m-%d') if safe_get(row, 'Birthdate', None, lambda x: pd.to_datetime(x, errors='coerce')) else ''}", unsafe_allow_html=True)
-                st.markdown(f"**Repaymen Cycle:** {safe_get(row, 'Repaymen Cycle', '')}", unsafe_allow_html=True)
+                st.markdown(f"**Repayment Cycle:** {safe_get(row, 'Repayment Cycle', '')}", unsafe_allow_html=True)  # Fixed typo
                 st.markdown(f"**Delay Days:** {safe_get(row, 'Delay Days', 0, lambda x: int(float(str(x)) if str(x).replace('.','').isdigit() else 0))}", unsafe_allow_html=True)
                 st.markdown(f"**Currency Code:** {safe_get(row, 'Currency Code', '')}", unsafe_allow_html=True)
             with col2:
                 st.markdown(f"**Total Outstanding:** {safe_get(row, 'Total Outstanding', 0.0, float)}", unsafe_allow_html=True)
                 st.markdown(f"**Statement Balance:** {safe_get(row, 'Statement Balance', 0.0, float)}", unsafe_allow_html=True)
-                st.markdown(f"**Statement Minum Payment:** {safe_get(row, 'Statement Minum Payment', 0.0, float)}", unsafe_allow_html=True)
+                st.markdown(f"**Statement Minimum Payment:** {safe_get(row, 'Statement Minum Payment', 0.0, float)}", unsafe_allow_html=True)  # Fixed typo
                 st.markdown(f"**Statement Overdue Amount:** {safe_get(row, 'Statement Overdue Amount', 0.0, float)}", unsafe_allow_html=True)
                 st.markdown(f"**Installment Amount (01):** {safe_get(row, 'Installment Amount (01)', 0.0, float)}", unsafe_allow_html=True)
                 st.markdown(f"**Installment Amount (02):** {safe_get(row, 'Installment Amount (02)', 0.0, float)}", unsafe_allow_html=True)
